@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Proyecto_Final.Migrations
 {
     /// <inheritdoc />
-    public partial class InicialFinal : Migration
+    public partial class ClavesCompuestasFinal : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -189,15 +189,13 @@ namespace Proyecto_Final.Migrations
                 name: "Inventarios",
                 columns: table => new
                 {
-                    IdInventario = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Stock = table.Column<int>(type: "int", nullable: false),
                     IdProducto = table.Column<int>(type: "int", nullable: false),
-                    IdSucursal = table.Column<int>(type: "int", nullable: false)
+                    IdSucursal = table.Column<int>(type: "int", nullable: false),
+                    Stock = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Inventarios", x => x.IdInventario);
+                    table.PrimaryKey("PK_Inventarios", x => new { x.IdProducto, x.IdSucursal });
                     table.ForeignKey(
                         name: "FK_Inventarios_Productos_IdProducto",
                         column: x => x.IdProducto,
@@ -216,16 +214,14 @@ namespace Proyecto_Final.Migrations
                 name: "DetallesVenta",
                 columns: table => new
                 {
-                    IdDetalleVenta = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Cantidad = table.Column<int>(type: "int", nullable: false),
-                    SubTotal = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
                     IdVenta = table.Column<int>(type: "int", nullable: false),
-                    IdProducto = table.Column<int>(type: "int", nullable: false)
+                    IdProducto = table.Column<int>(type: "int", nullable: false),
+                    Cantidad = table.Column<int>(type: "int", nullable: false),
+                    SubTotal = table.Column<decimal>(type: "decimal(10,2)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DetallesVenta", x => x.IdDetalleVenta);
+                    table.PrimaryKey("PK_DetallesVenta", x => new { x.IdVenta, x.IdProducto });
                     table.ForeignKey(
                         name: "FK_DetallesVenta_Productos_IdProducto",
                         column: x => x.IdProducto,
@@ -269,16 +265,6 @@ namespace Proyecto_Final.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_DetallesVenta_IdProducto",
                 table: "DetallesVenta",
-                column: "IdProducto");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DetallesVenta_IdVenta",
-                table: "DetallesVenta",
-                column: "IdVenta");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Inventarios_IdProducto",
-                table: "Inventarios",
                 column: "IdProducto");
 
             migrationBuilder.CreateIndex(

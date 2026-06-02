@@ -47,29 +47,21 @@ namespace Proyecto_Final.Migrations
 
             modelBuilder.Entity("Proyecto_Final.Models.DetalleVenta", b =>
                 {
-                    b.Property<int>("IdDetalleVenta")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdDetalleVenta"));
-
-                    b.Property<int>("Cantidad")
+                    b.Property<int>("IdVenta")
                         .HasColumnType("int");
 
                     b.Property<int>("IdProducto")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdVenta")
+                    b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
                     b.Property<decimal>("SubTotal")
                         .HasColumnType("decimal(10,2)");
 
-                    b.HasKey("IdDetalleVenta");
+                    b.HasKey("IdVenta", "IdProducto");
 
                     b.HasIndex("IdProducto");
-
-                    b.HasIndex("IdVenta");
 
                     b.ToTable("DetallesVenta");
                 });
@@ -101,12 +93,6 @@ namespace Proyecto_Final.Migrations
 
             modelBuilder.Entity("Proyecto_Final.Models.Inventario", b =>
                 {
-                    b.Property<int>("IdInventario")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdInventario"));
-
                     b.Property<int>("IdProducto")
                         .HasColumnType("int");
 
@@ -116,9 +102,7 @@ namespace Proyecto_Final.Migrations
                     b.Property<int>("Stock")
                         .HasColumnType("int");
 
-                    b.HasKey("IdInventario");
-
-                    b.HasIndex("IdProducto");
+                    b.HasKey("IdProducto", "IdSucursal");
 
                     b.HasIndex("IdSucursal");
 
