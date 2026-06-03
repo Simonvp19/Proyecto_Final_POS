@@ -12,8 +12,8 @@ using Proyecto_Final.Data;
 namespace Proyecto_Final.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260528011817_CorreccionReporteVenta")]
-    partial class CorreccionReporteVenta
+    [Migration("20260602211833_InitClean")]
+    partial class InitClean
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

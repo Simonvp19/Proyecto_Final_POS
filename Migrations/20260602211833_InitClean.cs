@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Proyecto_Final.Migrations
 {
     /// <inheritdoc />
-    public partial class ClavesCompuestasFinal : Migration
+    public partial class InitClean : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -258,8 +258,7 @@ namespace Proyecto_Final.Migrations
                         name: "FK_Reportes_Venta_Ventas_IdVenta",
                         column: x => x.IdVenta,
                         principalTable: "Ventas",
-                        principalColumn: "IdVenta",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "IdVenta");
                 });
 
             migrationBuilder.CreateIndex(
